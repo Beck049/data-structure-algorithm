@@ -12,8 +12,8 @@
 #include <string>	//											[3][0]  [3][1]  [3][2]
 #include <stdint.h>
 
-double* add	   (double *, int, int, double *, int, int);
-double* sub	   (double *, int, int, double *, int, int);
+double* add    (double *, int, int, double *, int, int);
+double* sub    (double *, int, int, double *, int, int);
 double* multi  (double *, int, int, double *, int, int);
 double* inverse(double *, int, int);
 double   det   (double *, int, int);
@@ -58,11 +58,11 @@ int main()
 	printf("Press 5 to do  the inverse  , Press 6 to do the transfer ,\n");
 	printf("Press 7 to print  matrix  1 , Press 8 to print  matrix 1 ,\n");
 
-    // add  (mat1, n1, m1, mat2, n2, m2);
-    // sub  (mat1, n1, m1, mat2, n2, m2);
-    // multi(mat1, n1, m1, mat2, n2, m2);
-    // det  (mat1, n1, m1);
-    // trans(mat1, n1, m1);
+    add  (mat1, n1, m1, mat2, n2, m2);
+    sub  (mat1, n1, m1, mat2, n2, m2);
+    multi(mat1, n1, m1, mat2, n2, m2);
+    det  (mat1, n1, m1);
+    trans(mat1, n1, m1);
     inverse(mat1, n1, m1);
 
 	return 0;
