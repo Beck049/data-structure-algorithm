@@ -11,273 +11,288 @@
 #include <stdio.h>	//											[2][0]  [2][1]  [2][2]
 #include <string>	//											[3][0]  [3][1]  [3][2]
 #include <stdint.h>
-void add	(int *, int, int, int *, int, int);
-void sub	(int *, int, int, int *, int, int);
-void multi  (int *, int, int, int *, int, int);
-void inverse(int *, int, int);
-int  det	(int *, int, int);//  // 
-void trans	(int *, int, int);
-void print	(int *, int, int);
+
+double* add	   (double *, int, int, double *, int, int);
+double* sub	   (double *, int, int, double *, int, int);
+double* multi  (double *, int, int, double *, int, int);
+double* inverse(double *, int, int);
+double   det   (double *, int, int);
+double* trans  (double *, int, int);
+void    print  (double *, int, int);
 
 int main()
 {
-	int n1, n2, m1, m2;
-	printf("Input the size of radix1:\n");
+    //set the size of radix1 & radix2
+    int n1, n2, m1, m2;
+    printf("Input the size of radix1 (nxm) :\n");
 	scanf("%d %d",&n1,&m1);
-	printf("Input the size of radix2:\n");
-	scanf("%d %d",&n2,&m2);//set the size of radix1 & radix2
+	printf("Input the size of radix2 (nxm) :\n");
+	scanf("%d %d",&n2,&m2);
+
+    //give the radixs a dynamic space
+    double *mat1, *mat2;
+	mat1 = (double*)malloc(n1*m1*sizeof(double));
+	mat2 = (double*)malloc(n2*m2*sizeof(double));
 	
-	int *mat1, *mat2;
-	mat1 = (int*)malloc(n1*m1*sizeof(int));
-	mat2 = (int*)malloc(n2*m2*sizeof(int));//give the radixs a dynamic space
-										   // radix[i][j] = radix[i*m+j]
-	printf("Matrix 1:\n");
+    // radix[i][j] = radix[i*m+j]
+	
+    //set the element of the radixs
+    printf("Matrix 1:\n");
 	for(int i = 0; i < n1*m1; i++)
 	{
-			scanf("%d",&mat1[i]);
+			scanf("%lf",&mat1[i]);
 	}
 	printf("Matrix 2:\n");
 	for(int i = 0; i < n2*m2; i++)
 	{
-			scanf("%d",&mat2[i]);
-	}										//set the element of the radixs
+			scanf("%lf",&mat2[i]);
+	}
 	printf("-------------------------------------------------------------\n");
-/////HERE/////HERE/////HERE/////HERE/////HERE/////HERE/////HERE/////HERE/////HERE
 
-	int select;
-	scanf("%d",&select);
+
+    // int op;
+	// scanf("%d",&op);
 	
 	printf("Press 1 to do   addition    , Press 2 to do substraction ,\n");
 	printf("Press 3 to do multiplication, Press 4 to do determination,\n");
 	printf("Press 5 to do  the inverse  , Press 6 to do the transfer ,\n");
 	printf("Press 7 to print  matrix  1 , Press 8 to print  matrix 1 ,\n");
-	
-	if(select == 1)
-	{
-		add(mat1,n1,m1,mat2,n2,m2);
-	}
-	else if(select == 2)
-	{
-		sub(mat1,n1,m1,mat2,n2,m2);
-	}
-	else if(select == 3)
-	{
-		multi(mat1,n1,m1,mat2,n2,m2);
-	}
-	else if(select == 4)
-	{
-		if( n1 != m1 )
-		{	printf ("matrix 1 has no determination\n");	}
-		else
-		{   printf("The determination of matrix 1 is %d\n",det(mat1,n1,m1));	}
-		
-		if( n2 != m2 )
-		{	printf ("matrix 2 has no determination\n");	}
-		else
-		{	printf("The determination of matrix 2 is %d\n",det(mat2,n2,m2));	}
-	}
-	else if(select == 5)
-	{////////
-		inverse(mat1,n1,m1);
-		inverse(mat2,n2,m2);
-	}
-	else if(select == 6)
-	{
-		printf("The tansfer of matrix 1 is\n");
-		trans(mat1,n1,m1);
-		printf("The tansfer of matrix 1 is\n");
-		trans(mat2,n2,m2);
-	}
-	else if(select == 7)
-	{
-		printf("The matrix 1 is\n");
-		print(mat1,n1,m1);
-	}
-	else if(select == 8)
-	{
-		printf("The matrix 2 is\n");
-		print(mat2,n2,m2);
-	}
-	else
-	{
-		printf("Undefined key");
-	}
 
-	inverse(mat1,n1,m1);
+    // add  (mat1, n1, m1, mat2, n2, m2);
+    // sub  (mat1, n1, m1, mat2, n2, m2);
+    // multi(mat1, n1, m1, mat2, n2, m2);
+    // det  (mat1, n1, m1);
+    // trans(mat1, n1, m1);
+    inverse(mat1, n1, m1);
 
 	return 0;
 }
 
-void add	(int *mat1, int n1, int m1, int *mat2, int n2, int m2)
+double* add	   (double *mat1, int n1, int m1, double *mat2, int n2, int m2)
 {
-	if(n1 == n2 && m1 == m2)
-	{
-		int *matrix;
-		int temp;
-		
-		matrix = (int*)malloc(n1*m1*sizeof(int));
-		
-		for(int i = 0; i < n1*m1; i++)
-		{
-			temp = mat1[i] + mat2[i] ;
-			printf("\n%d %d = %d",mat1[i],mat2[i],temp);
-			matrix[i] = temp;
-			printf("\n%d",matrix[i]);
-		}
-		
-		printf("\nAddition:\n");
-		print(matrix,n1,m1);
-		
-		free(matrix);
-	}
-	else
-	{
-		printf("ERROR\n");
-	}
+    if(n1 != n2 || m1 != m2)
+    {
+        printf("You can't add these two matrix\n");
+        return NULL;
+    }
+
+    double* a = (double*)malloc(sizeof(double)*n1*m1);
+
+    for(int i = 0; i < n1; i++)
+    {
+        for(int j = 0; j < m1; j++)
+        {
+            a[ (m1*i) + j ] = mat1[ (m1*i) + j ] + mat2[ (m2*i) + j ];
+        }
+    }
+
+    printf("the addition is:\n");
+    print(a, n1, m1);
+
+    return a;
 }
 
-void sub	(int *mat1, int n1, int m1, int *mat2, int n2, int m2)
+double* sub	   (double *mat1, int n1, int m1, double *mat2, int n2, int m2)
 {
-	if(n1 == n2 && m1 == m2)
-	{
-		int *matrix;
-		int temp;
-		
-		matrix = (int*)malloc(n1*m1*sizeof(int));
-		
-		for(int i = 0; i < n1*m1; i++)
-		{
-			temp = mat1[i] + mat2[i] ;
-			printf("\n%d %d = %d",mat1[i],mat2[i],temp);
-			matrix[i] = temp;
-			printf("\n%d",matrix[i]);
-		}
-		
-		printf("\nSubstraction:\n");
-		print(matrix,n1,m1);
-		
-		free(matrix);
-	}
-	else
-	{
-		printf("ERROR\n");
-	}
+    if(n1 != n2 || m1 != m2)
+    {
+        printf("You can't add these two matrix\n");
+        return NULL;
+    }
+
+    double* s = (double*)malloc(sizeof(double)*n1*m1);
+
+    for(int i = 0; i < n1; i++)
+    {
+        for(int j = 0; j < m1; j++)
+        {
+            s[ (m1*i) + j ] = mat1[ (m1*i) + j ] - mat2[ (m2*i) + j ];
+        }
+    }
+
+    printf("the substraction is:\n");
+    print(s, n1, m1);
+
+    return s;
 }
 
-void multi	(int *mat1, int n1, int m1, int *mat2, int n2, int m2)
+double* multi  (double *mat1, int n1, int m1, double *mat2, int n2, int m2)
 {
-	if(n1 == m2 && m1 == n2)
-	{
-		int *matrix;
-		int n, m, p;
-		
-		n = n1;		//radix column//
-		m = m2;		//radix row   //
-		p = m1;//=n2//count
-		
-		matrix = (int*)malloc(n*m*sizeof(int));
-		
-		for(int i = 0; i < n; i++)
-		{
-			for(int j = 0; j < m; j++)
-			{
-				int temp = 0;
-				
-				for(int k = 0; k < p; k++)
-				{
-					temp = temp + mat1[i*p+k]*mat2[k*m+j];
-				}
-				
-				matrix[i*m+j] = temp;
-			}
-		}
-		
-		printf("\nMultiplication:\n");
-		print(matrix,n,m);
-		
-		free(matrix);
-	}
-	else
-	{
-		printf("ERROR\n");
-	}
+    if( m1 != n2 )
+    {
+        printf("You can't multiply these two matrix\n");
+        return NULL;
+    }
+
+    double* mul = (double*)calloc(sizeof(double),n1*m2);
+
+    for(int i = 0; i < n1; i++)
+    {
+        for(int j = 0; j < m2; j++)
+        {
+            for(int k = 0; k < m1; k++)
+            {
+                mul[ (m2*i) + j ] += mat1[(i*m1)+k] * mat2[(k*m2)+j];
+            }
+        }
+    }
+
+    printf("the multiplication is:\n");
+    print(mul, n1, m2);
+
+    return mul;
 }
-int det 	(int *matrix, int n, int m)
+
+double  det    (double *mat, int n, int m)
 {
-	int det = 0;
-	int ad = 0, mi = 0;
-	int a = 1, b = 1, t = 0;
-	
-	for(int j = 0; j < n; j++)
+    if( n != m )
+    {
+        printf("the matrix has no determination\n");
+        return -1;
+    }
+
+    double d = 0, add = 0, sub = 0;
+    int a = 1, b = 1, t = 0;
+
+    for(int j = 0; j < n; j++)
 	{
 		t = j;
 		for(int i = 0; i < n; i++)
 		{
 			t %= n;
-			a *= matrix[i*n + t];
-		//  printf("[%d, %d] = %d\n", i, t, matrix[i*n + t]);
+			a *= mat[i*n + t];
 			t++;
 		}
-		ad += a;
+		add += a;
 		a = 1;
 	}
-//  printf("add = %d\n", ad);
 
-	for(int j = 0; j < n; j++)
+    for(int j = 0; j < n; j++)
 	{
 		t = j;
 		for(int i = 0; i < n; i++)
 		{
 			t %= n;
-			b *= matrix[i*n + t];
-		//  printf("[%d, %d] = %d\n", i, t, matrix[i*n + t]);
+			b *= mat[i*n + t];
 			t += (n-1);
 		}
-		mi += b;
+		sub += b;
 		b = 1;
 	}
-//  printf("min = %d\n", mi);
 
-	det = ad - mi;
+    d = add - sub;
 
-//  printf("%d - %d = %d\n", ad, mi, det);
-	
-	return det;
+    printf("the determination is %lf\n", d);
+
+    return d;
+
 }
-// radix[3][3]
-//
-// n=3			[0][0]  [0][1]  [0][2]
-// m=3			[1][0]  [1][1]  [1][2]
-//  			[2][0]  [2][1]  [2][2]
-// 
-// radix[i][j] = radix[i*m+j]
-//EDITING//EDITING//EDITING//EDITING//EDITING//EDITING//EDITING
-void inverse(int *matrix, int n, int m)
+
+double* trans  (double *mat, int n, int m)
 {
-	if(det(matrix,n,m) != 0)
-	{
-		printf("GUESS JORDEN !");
-	}
-	else
-	{
-		printf("Inverse matrix not exist");
-	}
+    double* t = (double*)malloc(sizeof(double)*n*m);
+
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            t[ (n*j) + i ] = mat[ (m*i) + j ];
+        }
+    }
+
+    printf("the transfer is :\n");
+    print(t, m, n);
+
+    return t;
 }
 
-void trans	(int *matrix, int n, int m)
+void    print  (double *mat, int n, int m)
 {
-	print(matrix,m,n);
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            printf("%lf\t", mat[ (m*i) + j ]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
 
-void print	(int *matrix, int n, int m)
+double* inverse(double *mat, int n, int m)
 {
-	for(int i = 0; i < n; i++)
-	{
-		for(int j = 0; j < m; j++)
-		{
-			printf("%d ",matrix[(i*m)+j]);
-		}
-		printf("\n");
-	}
-}
+    if( n != m || det(mat, n, m) == 0)
+    {
+        printf("the matrix has no determination\n");
+        return NULL;
+    }
 
+    double* in = (double*)calloc(sizeof(double), n*m);
+    // initial in[]
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            if( i == j )
+            {
+                in[ (m*i) + j ] = 1;
+            }
+        }
+    }
+    
+    // reduce row echelon form
+    for(int i = 0; i < n; i++)
+    {
+        // make sure selected value is not 0
+        if( mat[(i*m) + i] == 0 )
+        {
+            if( i == n-1 ){ break; }
+            else
+            {
+                // find nonzero row
+                int k = -1;
+                for(int j = i+1; j < n; j++)
+                {
+                    if( mat[ (j*m) + j ] != 0 )
+                    {
+                        k = j;
+                        break;
+                    }
+                }
+                // if can't found
+                if( k == -1 ){ k = i+1; }
+                // add to current row
+                for(int j = 0; j < m; j++)
+                {
+                    mat[ (i*m) + j ] += mat[ ((i+1)*m) + j ];
+                    in [ (i*m) + j ] += in [ ((i+1)*m) + j ];
+                }
+            }
+        }
+        double temp = 0;
+        // turn it into 1
+        temp = mat[ (i*m) + i ];
+        for(int j = 0; j < m; j++)
+        {
+            mat[ (i*m) + i ] /= temp;
+            in [ (i*m) + i ] /= temp;
+        }
+        // clear the other value
+        for(int j = 0; j < n; j++)
+        {
+            if( j == i ){ continue; }
+
+            temp = (-1)* mat[ (j*m) + i ];
+            for(int k = 0; k < m; k++)
+            {
+                mat[ (j*m) + k ] += temp * mat[ (i*m) + k ];
+                in [ (j*m) + k ] += temp * in [ (i*m) + k ];
+            }
+        }
+    }
+
+    printf("the inverse is :\n");
+    print(in, n, n);
+
+    return in;
+}
