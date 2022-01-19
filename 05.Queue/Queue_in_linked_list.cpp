@@ -116,10 +116,10 @@ int pop()
 	{
 		printf("Pop out name : %s\tscore : %d\n",front->name,front->score);
 		
-		//temp = front;
+		temp = front;
 		front = front->next;
 		
-		//free(temp);
+		free(temp);
 	}
 	return 0;
 }
@@ -135,11 +135,6 @@ int peek()
 	else
 	{
 		printf("Peek name : %s\tscore : %d\n",front->name,front->score);
-		
-		//temp = front;
-		//front = front->next;
-		
-		//free(temp);
 	}
 	return 0;
 }
