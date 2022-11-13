@@ -105,7 +105,7 @@ void in (tree ptr)      //中序走訪
 {                       //
     if(ptr != NULL)
     {
-        in (ptr->left);//left tree
+        in(ptr->left);//left tree
         printf("[%2d] ",ptr->data);//root
         in(ptr->right);//right tree
     }
@@ -116,8 +116,8 @@ void pre (tree ptr)     //前序走訪
     if(ptr != NULL)
     {
         printf("[%2d] ",ptr->data);//root
-        in (ptr->left);//left tree
-        in(ptr->right);//right tree
+        pre(ptr->left);//left tree
+        pre(ptr->right);//right tree
     }
 }
 
@@ -125,8 +125,8 @@ void post (tree ptr)    //後序走訪
 {                       //
     if(ptr != NULL)
     {
-        in (ptr->left);//left tree
-        in(ptr->right);//right tree
+        post(ptr->left);//left tree
+        post(ptr->right);//right tree
         printf("[%2d] ",ptr->data);//root
     }
 }
