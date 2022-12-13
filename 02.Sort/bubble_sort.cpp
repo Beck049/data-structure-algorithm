@@ -26,6 +26,7 @@ int* arr_bubble(int* data, int len){
 	int temp;
 	for(int i = len-1; i >= 0; i--)//scan times//
 	{
+		int exec = 0;
 		for(int j = 0; j < i; j++)//compare times//
 		{
 			if(data[j] > data[j+1])//if the front is bigger then switch//
@@ -33,10 +34,15 @@ int* arr_bubble(int* data, int len){
 				temp = data[j];
 				data[j] = data[j+1];
 				data[j+1] = temp;
+				exec++;
 			}
 		}
 		printf("%d: ", len-i);
 		print_array(data, len);
+		
+		if(exec == 0){
+			break;
+		}
 	} 
 	return data;
 }
