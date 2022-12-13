@@ -1,46 +1,32 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "array_func.h"
 
-#define SIZE 8
+// g++ insertion_sort.cpp -o sort
 
-void inputarr (int *, int);
-void showdata (int *);
-void insert   (int *);
+void insert(int *data, int len);
 
 int main()
 {
-	int data[SIZE];
-	inputarr(data,SIZE);
-	insert(data);
+	int origin_data[] = {16,25,39,27,12,8,45,63}; //Origin data//
+	int len = 8;
+	int* data = init_array(origin_data, len);
+
+	printf("Insertion sort\nOrigin data:");
+	print_array(data, len);
+	//print the origin data//
+
+	insert(data, len);
+
+	printf("\nResult:");
+	print_array(data, len);
 	
 	return 0;
 }
 
-//input array
-void inputarr (int *data, int size)
-{
-	for(int i = 0; i < SIZE; i++)
-	{
-		printf("%d: ",i+1);
-		scanf("%d",&data[i]);
-	}
-}
-
-//print the data
-void showdata (int *data)
-{
-	for(int i = 0; i < SIZE; i++)
-	{
-		printf("%3d ",data[i]);
-	}
-	printf("\n");
-}
-
-void insert(int *data)
+void insert(int *data, int len)
 {
 	int temp, j;
 	
-	for(int i = 1; i < SIZE; i++)
+	for(int i = 0; i < len; i++)
 	{
 		temp = data[i];
 		j = i-1;
@@ -53,7 +39,7 @@ void insert(int *data)
 		
 		data[j+1] = temp;
 		
-		printf("%d: ",i);
-		showdata(data);
+		printf("%d: ",i+1);
+		print_array(data, len);
 	}
 }
