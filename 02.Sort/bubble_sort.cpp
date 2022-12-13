@@ -1,22 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "array_func.h"
 
-int data[8]={16,25,39,27,12,8,45,63}; //Origin data// 
+// g++ bubble_sort.cpp -o sort
+
+int* arr_bubble(int* data, int len);
 
 int main()
 {
-	int temp;
+	int origin_data[] = {16,25,39,27,12,8,45,63}; //Origin data//
+	int len = 8;
+	int* data = init_array(origin_data, len);
 	
 	printf("Bubble sort\nOrigin data:");
-	
-	for(int i = 0; i <8; i++)
-	{
-		printf("%3d ",data[i]);
-	}
-	printf("\n\n");
+	print_array(data, len);
 	//print the origin data//
 	
-	for(int i = 7; i >= 0; i--)//scan times//
+	data = arr_bubble(data, len);
+	
+	printf("\nResult:");
+	print_array(data, len);
+	
+	return 0;
+} 
+
+int* arr_bubble(int* data, int len){
+	int temp;
+	for(int i = len-1; i >= 0; i--)//scan times//
 	{
 		for(int j = 0; j < i; j++)//compare times//
 		{
@@ -27,21 +35,8 @@ int main()
 				data[j+1] = temp;
 			}
 		}
-		printf("%d :",8-i);
-		for(int j = 0; j < 8; j++)
-		{
-			printf("%3d ",data[j]);
-		}
-		
-		printf("\n");
+		printf("%d: ", len-i);
+		print_array(data, len);
 	} 
-	
-	printf("\nResult:");
-	for(int i = 0; i < 8; i++)
-	{
-		printf("%3d ",data[i]);
-	}
-	printf("\n");
-	
-	return 0;
-} 
+	return data;
+}
