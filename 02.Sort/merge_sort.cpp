@@ -1,12 +1,10 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <time.h> 
-#define MAX1 10 
-#define MAX2 10 
-#define SWAP(x,y) {int t; t = x; x = y; y = t;}
+#include "quick_sort.h"
 
-int partition (int*, int, int);
-void quickSort(int*, int, int);
+#define MAX1 8
+#define MAX2 8
+
+// g++ merge_sort.cpp -o sort 
+
 void mergeSort(int*, int, int*, int, int*);
 
 int main(void) 
@@ -56,33 +54,6 @@ int main(void)
     printf("\n"); 
 
     return 0; 
-} 
-
-int partition(int *number, int left, int right) 
-{ 
-    int s = number[right]; 
-    int i = left - 1; 
-    int j;
-    for(j = left; j < right; j++) 
-	{ 
-        if(number[j] <= s) 
-		{ 
-            i++; 
-            SWAP(number[i], number[j]); 
-        } 
-    } 
-    SWAP(number[i+1], number[right]); 
-    return i+1; 
-} 
-
-void quickSort(int *number, int left, int right) 
-{ 
-    if(left < right) 
-	{ 
-        int q = partition(number, left, right); 
-        quickSort(number, left, q-1); 
-        quickSort(number, q+1, right); 
-    } 
 } 
 
 void mergeSort(int *number1, int M, int *number2, int N, int *number3) 
