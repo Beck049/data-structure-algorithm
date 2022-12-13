@@ -1,34 +1,26 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <time.h> 
-#define MAX 8 
-#define SWAP(x,y) {int t; t = x; x = y; y = t;} 
+#include "array_func.h"
+
+// g++ quick_sort.cpp -o sort 
 
 int partition(int*, int, int); 
 void quickSort(int*, int, int); 
 
-int main(void) 
-{ 
-    srand(time(NULL)); 
+int main(void) { 
+    int len = 8;
+    int* origin_data;
+    printf("Before sort: ");
+    origin_data = rand_array(len);
     
-    int number[MAX] = {0}; 
+    printf("Quick sort\nOrigin data:");
+	print_array(origin_data, len);
+	//print the origin data//
 
-    printf("Before sort: "); 
-    int i;
-    for(i = 0; i < MAX; i++) 
-	{ 
-        number[i] = rand() % 100; 
-        printf("%d ", number[i]); 
-    } 
+    int* data = init_array(origin_data, len);
 
-    quickSort(number, 0, MAX-1); 
+    quickSort(data, 0, len-1);
 
-    printf("\nAfter sort: "); 
-    for(i = 0; i < MAX; i++) 
-    {
-        printf("%d ", number[i]); 
-	}
-    printf("\n"); 
+    printf("\nAfter sort: ");
+    print_array(data, len);
 
     return 0; 
 } 
@@ -44,24 +36,9 @@ int partition(int *number, int left, int right)
             i++; 
             SWAP(number[i], number[j]); 
         } 
+    }
 
-        // printf("\nPrint sort: "); 
-        // for(int k = 0; k < MAX; k++) 
-        // {
-        //     printf("%d ", number[k]); 
-        // }
-        // printf("\n"); 
-
-    } 
-
-
-    SWAP(number[i+1], number[right]); 
-    // printf("\nswap sort: "); 
-    //     for(int k = 0; k < MAX; k++) 
-    //     {
-    //         printf("%d ", number[k]); 
-    //     }
-    //     printf("\n"); 
+    SWAP(number[i+1], number[right]);
     return i+1; 
 } 
 
