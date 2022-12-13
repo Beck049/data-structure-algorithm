@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h> 
+#include "array_func.h"
+
+// g++ radix_sort.cpp -o sort
 
 void radixSort(int*);
 
@@ -8,20 +9,17 @@ int main(void)
     int data[10] = {73, 22, 93, 43, 55, 14, 28, 65, 39, 81}; 
       
     printf("\nBefore sort: "); 
-    int i;
-    for(i = 0; i < 10; i++) 
-    {
-		printf("%d ", data[i]); 
-	}
-    putchar('\n'); 
+    int len = 8;
+	int* data = init_array(data, len);
+	
+	printf("Radix sort\nOrigin data:");
+	print_array(data, len);
+	//print the origin data//
 
     radixSort(data);
     
-    printf("\nAfter sort: "); 
-    for(i = 0; i < 10; i++) 
-    {
-        printf("%d ", data[i]); 
-    }
+    printf("\nResult:");
+	print_array(data, len);
     
     return 0; 
 } 
