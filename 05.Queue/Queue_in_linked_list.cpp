@@ -106,7 +106,7 @@ int push(char *name, int score)
 
 int pop()
 {
-	//link temp;
+	link temp;
 	
 	if(front == NULL)	//if empty
 	{
