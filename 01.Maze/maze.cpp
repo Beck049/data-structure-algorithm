@@ -31,6 +31,8 @@
 #define ExitX 8
 #define ExitY 10
 
+// g++ maze.cpp -o maze
+
 int MAZE[10][12] = { 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                      1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
                      1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 
@@ -61,7 +63,7 @@ int main()
 
     x = 1; // entrance x
     y = 1; // entrance y
-    printf("The maze :"LYLW"\n(0 is the path)"WHT"\n(1 is wall) "GRN"\n(2 is entrance) "RED"\n(3 is exit)\n"RST);
+    printf("The maze :" LYLW "\n(0 is the path)" WHT "\n(1 is wall) " GRN "\n(2 is entrance) " RED "\n(3 is exit)\n" RST);
     print_map();
 
     while( x <= ExitX && y <= ExitY )
@@ -99,7 +101,7 @@ int main()
         // print_map();
     }
 
-    printf(BL"(6 is the path)\n"RST);
+    printf(BL "(6 is the path)\n" RST);
 
     print_map();
 
@@ -179,23 +181,23 @@ void print_map()
         {
             if(MAZE[i][j] == 0)
             {
-                printf(LYLW"%2d "RST,MAZE[i][j]);
+                printf(LYLW "%2d " RST,MAZE[i][j]);
             }
             else if(MAZE[i][j] == 1)
             {
-                printf(WHT"%2d "RST,MAZE[i][j]);
+                printf(WHT "%2d " RST,MAZE[i][j]);
             }
             else if(MAZE[i][j] == 2)
             {
-                printf(GRN"%2d "RST,MAZE[i][j]);
+                printf(GRN "%2d " RST,MAZE[i][j]);
             }
             else if(MAZE[i][j] == 3)
             {
-                printf(RED"%2d "RST,MAZE[i][j]);
+                printf(RED "%2d " RST,MAZE[i][j]);
             }
             else if(MAZE[i][j] == 6)
             {
-                printf(BL"%2d "RST,MAZE[i][j]);
+                printf(BL "%2d " RST,MAZE[i][j]);
             }
             else
             {
